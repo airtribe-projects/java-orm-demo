@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <artifactId>airtribe-orm-demo</artifactId>
+
+    <build>
+
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <annotationProcessorPaths>
+                        <path>
+                            <artifactId>lombok</artifactId>
+                            <groupId>org.projectlombok</groupId>
+                            <version>1.18.34</version>
+                        </path>
+                    </annotationProcessorPaths>
+
+                    <release>${java.version}</release>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+                <groupId>org.apache.maven.plugins</groupId>
+                <version>3.8.1</version>
+            </plugin>
+
+            <plugin>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <configuration>
+                            <mainClass>
+                                com.airtribe.orm.demo.server.AirtribeOrmDemoApplication
+                            </mainClass>
+                            <skip>false</skip>
+                        </configuration>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <groupId>org.springframework.boot</groupId>
+            </plugin>
+
+            <plugin>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                        <id>default</id>
+                        <phase>package</phase>
+                    </execution>
+                    <execution>
+                        <goals>
+                            <goal>push</goal>
+                        </goals>
+                        <id>push-image</id>
+                        <phase>deploy</phase>
+                    </execution>
+                </executions>
+                <groupId>com.spotify</groupId>
+                <version>1.4.12</version>
+            </plugin>
+
+            <plugin>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <groupId>org.springframework.boot</groupId>
+            </plugin>
+        </plugins>
+
+    </build>
+    <dependencies>
+
+        <dependency>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <groupId>org.springframework.boot</groupId>
+        </dependency>
+
+        <dependency>
+            <artifactId>spring-boot-starter-integration</artifactId>
+            <groupId>org.springframework.boot</groupId>
+        </dependency>
+        <dependency>
+            <artifactId>spring-integration-core</artifactId>
+            <groupId>org.springframework.integration</groupId>
+        </dependency>
+
+        <dependency>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                    <groupId>org.springframework.boot</groupId>
+                </exclusion>
+            </exclusions>
+            <groupId>org.springframework.boot</groupId>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-undertow -->
+        <dependency>
+            <artifactId>spring-boot-starter-undertow</artifactId>
+            <groupId>org.springframework.boot</groupId>
+        </dependency>
+
+        <dependency>
+            <artifactId>spring-boot-starter-integration</artifactId>
+            <groupId>org.springframework.boot</groupId>
+        </dependency>
+
+        <dependency>
+            <artifactId>spring-integration-http</artifactId>
+            <groupId>org.springframework.integration</groupId>
+        </dependency>
+
+        <dependency>
+            <artifactId>spring-integration-jpa</artifactId>
+            <groupId>org.springframework.integration</groupId>
+        </dependency>
+
+        <dependency>
+            <artifactId>spring-integration-kafka</artifactId>
+            <groupId>org.springframework.integration</groupId>
+        </dependency>
+
+        <dependency>
+            <artifactId>mysql-connector-j</artifactId>
+            <groupId>com.mysql</groupId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <artifactId>lombok</artifactId>
+            <groupId>org.projectlombok</groupId>
+            <scope>provided</scope>
+            <version>1.18.34</version>
+        </dependency>
+
+        <dependency>
+            <artifactId>commons-io</artifactId>
+            <groupId>org.apache.commons</groupId>
+            <version>1.3.2</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-pool2 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
+            <version>2.12.0</version>
+        </dependency>
+
+        <dependency>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+            <groupId>org.springframework.boot</groupId>
+        </dependency>
+
+        <dependency>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <groupId>org.springdoc</groupId>
+            <version>2.1.0</version>
+        </dependency>
+
+        <!--    hibernate validator for DTO checks-->
+        <dependency>
+            <artifactId>hibernate-validator</artifactId>
+            <groupId>org.hibernate.validator</groupId>
+            <version>6.2.0.Final</version>
+        </dependency>
+
+        <!--Redis Dependencies-->
+        <dependency>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+            <groupId>org.springframework.boot</groupId>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/io.lettuce/lettuce-core -->
+        <dependency>
+            <groupId>io.lettuce</groupId>
+            <artifactId>lettuce-core</artifactId>
+            <version>6.3.2.RELEASE</version>
+        </dependency>
+
+    </dependencies>
+
+    <description>ORM Usage, Index, Joins , Associations, Local Cache and Redis Example</description>
+    <groupId>com.airtribe.orm.demo</groupId>
+    <modelVersion>4.0.0</modelVersion>
+    <name>airtribe-orm-demo</name>
+
+    <!--    properties used all over the project-->
+    <parent>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <groupId>org.springframework.boot</groupId>
+        <relativePath/>
+        <version>3.1.0</version>
+    </parent>
+
+    <profiles>
+        <profile>
+            <id>local</id>
+            <properties>
+                <build.number>0</build.number>
+                <build.revision>local-dev</build.revision>
+                <project.version>0.0.1-SNAPSHOT</project.version>
+            </properties>
+        </profile>
+
+        <profile>
+            <build>
+                <plugins>
+                    <!-- Maven Deploy -->
+                    <plugin>
+                        <artifactId>maven-deploy-plugin</artifactId>
+                        <configuration>
+                            <skip>true</skip>
+                        </configuration>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <version>2.8.2</version>
+                    </plugin>
+                </plugins>
+            </build>
+            <id>docker</id>
+        </profile>
+    </profiles>
+
+    <!--   dependency management by specifying the version in management section so that we don't need to add versions for dependencies which are part of the below mentioned group id -->
+
+    <properties>
+        <java.version>17</java.version>
+        <project.version>0.0.1</project.version>
+    </properties>
+
+    <version>${project.version}</version>
+
+</project>

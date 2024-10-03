@@ -1,0 +1,16 @@
+singleServerConfig:
+  idleConnectionTimeout: 10000
+  connectTimeout: 5000
+  timeout: 3000
+  retryAttempts: 3
+  retryInterval: 1500
+  clientName: null
+  address: "redis://${REDIS_IP}:${REDIS_PORT}"
+  password: ${REDIS_PASSWORD}
+  connectionMinimumIdleSize: 30
+  connectionPoolSize: 512
+  database: 0
+threads: 128
+nettyThreads: 256
+codec: !<org.redisson.codec.FstCodec> { }
+transportMode: "NIO"

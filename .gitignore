@@ -1,0 +1,11 @@
+*.idea
+*/target/
+*.iml
+*.jar
+!libs/**/*.jar
+target/
+out/
+
+### Mac OS ###
+.DS_Store
+.idea/

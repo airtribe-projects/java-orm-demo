@@ -1,0 +1,24 @@
+logging.level.org.hibernate.SQL: DEBUG
+logging.level.org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+server:
+  port: 9011
+
+spring:
+  profiles:
+    active: local
+  server:
+    undertow:
+      threads:
+        worker: 64
+        io: 32
+
+cache:
+  ttl: 10
+
+management:
+  health.redis.enabled: false
+  health.rabbit.enabled: false
+  endpoints:
+    web.exposure.include: '*'
+    metrics.enabled: true
