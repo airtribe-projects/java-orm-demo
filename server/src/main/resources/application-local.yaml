@@ -1,0 +1,59 @@
+spring:
+  profile:
+    active: local
+
+  datasource:
+    url: jdbc:mysql://${DB_IP}:${DB_PORT}/local?useUnicode=true&characterEncoding=utf8&useSSL=true&enabledTLSProtocols=TLSv1.2
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      idle-timeout: 5000
+      connection-timeout: 500
+      maximum-pool-size: 80
+      minimum-idle: 64
+      max-lifetime: 1800000
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    database: MYSQL
+    openInView: false
+    show_sql: false
+    properties:
+      hibernate:
+        jdbc.batch_size: 5
+        generate_statistics: false
+    hibernate:
+      ddl-auto: update
+      naming-strategy: org.springframework.boot.orm.jpa.hibernate.SpringNamingStrategy
+      generate_statistics: true
+
+  kafka:
+    bootstrapAddress: ${KAFKA_BOOT_STRAP_ADDRESS}
+    groupId: localKafkaGroup
+    concurrency.default: 4
+
+redis:
+# STANDALONE: 127.0.0.1:6379 , Cluster: 127.0.0.1:6380,127.0.0.1:6382,127.0.0.1:6384
+  hostname: 127.0.0.1:6379
+  password: nahiBataunga@1
+  connectTimeout: 200
+  readTimeout: 200
+  pool:
+    minEvictableIdleTimeMillis: 1500000 # 25 minutes
+    timeBetweenEvictionRunsMillis: 300000 # 5 minutes
+    maxTotal: 256
+    minIdle: 32
+    maxIdle: 64
+    worker: 256
+    io: 128
+
+cache:
+  provider: REDIS
+  type: STANDALONE # STANDALONE, CLUSTER
+  manager:
+    enabled: true
+
+razorpay:
+  base_url: https://ifsc.razorpay.com

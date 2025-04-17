@@ -1,0 +1,26 @@
+services:
+  java-orm-demo-app-svc:
+    image: localhost:5000/java-orm-demo:redis-1   # Pull the image from the local registry
+    # container_name: java-orm-demo as we are autoscaling we will not need this
+    ports:
+      - '9011'   # Expose the app on port 9011 , removing static binding '9011:9011' as we will be auto scaling
+    environment:
+      DB_IP: mysql-svc        # MySQL service
+      DB_PORT: 3306
+      DB_USERNAME: local
+      DB_PASSWORD: nahiBataunga@1
+      DB_NAME: test
+#      REDIS_IP: redis-svc      # Redis service
+#      REDIS_PORT: 6379
+      REDIS_IP: redis-master-node-1:6380,redis-master-node-2:6382,redis-master-node-3:6384,redis-replica-node-1:6381,redis-replica-node-2:6383,redis-replica-node-3:6385
+      REDIS_PASSWORD: nahiBataunga@1
+      KAFKA_BOOT_STRAP_ADDRESS: kafka-svc:9092  # Kafka service
+      # ENABLE_OTEL: 'false'  # Enable OpenTelemetry
+      # ENABLE_PII_LOGBACK: 'true'  # Enable PII logging
+      JAVA_PROCESS_MIN_HEAP: 512m
+      JAVA_PROCESS_MAX_HEAP: 1024m
+    networks:
+      - local-network
+networks:
+  local-network:
+    external: true  # Assuming the network `local-network` already exists

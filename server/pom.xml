@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.airtribe.orm.demo</groupId>
+        <artifactId>java-orm-demo</artifactId>
+        <version>0.0.1</version>
+    </parent>
+
+    <artifactId>server</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.airtribe.orm.demo</groupId>
+            <artifactId>ifsc</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.airtribe.orm.demo</groupId>
+            <artifactId>instamart</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.airtribe.orm.demo</groupId>
+            <artifactId>commons</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <annotationProcessorPaths>
+                        <path>
+                            <artifactId>lombok</artifactId>
+                            <groupId>org.projectlombok</groupId>
+                            <version>1.18.34</version>
+                        </path>
+                    </annotationProcessorPaths>
+
+                    <release>${java.version}</release>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+                <groupId>org.apache.maven.plugins</groupId>
+                <version>3.8.1</version>
+            </plugin>
+
+            <plugin>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <configuration>
+                            <mainClass>
+                                com.airtribe.orm.demo.server.AirtribeOrmDemoApplication
+                            </mainClass>
+                            <skip>false</skip>
+                        </configuration>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <groupId>org.springframework.boot</groupId>
+            </plugin>
+
+            <plugin>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                        <id>default</id>
+                        <phase>package</phase>
+                    </execution>
+                    <execution>
+                        <goals>
+                            <goal>push</goal>
+                        </goals>
+                        <id>push-image</id>
+                        <phase>deploy</phase>
+                    </execution>
+                </executions>
+                <groupId>com.spotify</groupId>
+                <version>1.4.12</version>
+            </plugin>
+
+            <plugin>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <groupId>org.springframework.boot</groupId>
+            </plugin>
+        </plugins>
+
+    </build>
+</project>
